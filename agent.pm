@@ -178,9 +178,10 @@ sub new {
     return $self;
 }
 
-sub register($$$$) {
-    my ($self, $name, $oid, $sub) = @_;
-    my $reg = NetSNMP::agent::netsnmp_handler_registration::new($name, $oid, $sub);
+sub register() {
+    my ($self, $name, $oid, $sub, $context) = @_;
+    $context = "" if not defined $context; # maybe it's better to retrieve the default context from Default Store, or use undef instead
+    my $reg = NetSNMP::agent::netsnmp_handler_registration::new($name, $oid, $sub, $context);
     $reg->register() if ($reg);
     return $reg;
 }

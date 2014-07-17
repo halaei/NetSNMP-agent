@@ -497,10 +497,11 @@ na_errlog(me,value)
 MODULE = NetSNMP::agent  PACKAGE = NetSNMP::agent::netsnmp_handler_registration  PREFIX = nsahr_
 
 NetSNMP::agent::netsnmp_handler_registration
-nsahr_new(name, regoid, perlcallback)
+nsahr_new(name, regoid, perlcallback, context)
         char *name;
 	char *regoid;
         SV   *perlcallback;
+	char *context;
     PREINIT:
 	oid myoid[MAX_OID_LEN];
 	size_t myoid_len = MAX_OID_LEN;
@@ -522,6 +523,7 @@ nsahr_new(name, regoid, perlcallback)
                                                  HANDLER_CAN_RWRITE);
             cb_data->perl_cb = newSVsv(perlcallback);
             RETVAL->handler->myvoid = cb_data;
+            RETVAL->contextName = strdup(context);
         }
     OUTPUT:
         RETVAL
