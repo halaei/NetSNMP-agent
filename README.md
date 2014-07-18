@@ -1,4 +1,4 @@
 NetSNMP-agent
 =============
 
-an extension of CPAN's NetSNMP::agent with context support
+*An extension of perl NetSNMP::agent module with context support*
